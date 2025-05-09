@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>173 Reasons I Love You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: url('img.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    h1 {
+      text-align: center;
+      color: #fff;
+      margin: 20px;
+      font-size: 1.8em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    #counter {
+      color: white;
+      margin: 10px;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    .carousel {
+      width: 90%;
+      max-width: 400px;
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .card {
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      padding: 20px;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 100%;
+      opacity: 0;
+      transition: all 0.6s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    .card.active {
+      left: 0;
+      opacity: 1;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #ffb6c1;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 1em;
+      font-weight: 600;
+      color: white;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button:active {
+      transform: scale(0.95);
+    }
+    .music-player {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .music-player label {
+      display: block;
+      color: white;
+      margin-bottom: 8px;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    @media (max-width: 500px) {
+      .carousel {
+        height: 200px;
+      }
+      .card {
+        font-size: 1em;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>173 Reasons I Love Her 💖</h1>
+  <p id="counter"></p>
+  <div class="carousel" id="carousel"></div>
+  <div class="buttons">
+    <button id="prevBtn" onclick="prevCard()">← Back</button>
+    <button id="nextBtn" onclick="nextCard()">Next →</button>
+  </div>
+
+  <div class="music-player">
+    <label for="audioPlayer">💿 Play Our Song:</label>
+    <audio id="audioPlayer" controls>
+      <source src="gluesong.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <script>
+    const reasonsText = `
+1. Her
+
+
+2. Her when she’s a lover girl
+
+
+3. Her brown eyes
+
+
+4. Her laugh
+
+
+5. Her humour
+
+
+6. Her voice
+
+
+7. Her face without makeup
+
+
+8. Her hair when she doesn’t straighten it
+
+
+9. She treats me so well
+
+
+10. Her height
+
+
+11. She's so light and easy to pick up
+
+
+12. Her hair when she straightens it
+
+
+13. Her reposts
+
+
+14. Her when she’s mad and gives me the silent treatment
+
+
+15. Her when she calls me handsome
+
+
+16. Her fit checks
+
+
+17. Her new bob hairstyle
+
+
+18. Her old hairstyle of long hair
+
+
+19. How she looks at me when we’re about to kiss
+
+
+20. How she doesn’t care about material gifts
+
+
+21. How she looks at me when I handpick her flowers
+
+
+22. Her name
+
+
+23. How she consoles me when I’m upset
+
+
+24. How she makes me feel like I can open up to her
+
+
+25. How understanding she is when I open up to her
+
+
+26. How she never does anything that she knows would hurt me
+
+
+27. Her love for me
+
+
+28. Her awkwardness on our first date
+
+
+29. Our first kiss
+
+
+30. Her reaction when I first ask her to be mine
+
+
+31. Our beach date
+
+
+32. How her body perfectly fits into mine when I hug her
+
+
+33. She never asks me to buy her expensive things
+
+
+34. The little dye still left in her hair
+
+
+35. Her winged eye makeup
+
+
+36. The strength of her emotions
+
+
+37. The way her hair smells
+
+
+38. The way she holds my hand
+
+
+39. The way she tries to do things that she knows would make me happy
+
+
+40. The way she wants us to work
+
+
+41. How easily she steals my heart
+
+
+42. Her femininity
+
+
+43. Her kindness
+
+
+44. How she makes me cry out of happiness
+
+
+45. The way she’s terrified of dogs
+
+
+46. Her eye contact
+
+
+47. The academic weapon in her
+
+
+48. She doesn’t smoke
+
+
+49. She believes in love
+
+
+50. The way she calls me her love
+
+
+51. When she messes up my hairstyle
+
+
+52. How she gives me tips on my eyebrows
+
+
+53. The spell she casts on me
+
+
+54. The size of her heart
+
+
+55. How her hand fits mine perfectly
+
+
+56. How we are like the kind of love in the movies
+
+
+57. How she always makes me feel like I’m her true love
+
+
+58. Her plans to get married to me
+
+
+59. Her plans of a small wedding
+
+
+60. How she wears a necklace with my name on it
+
+
+61. Our museum dates
+
+
+62. How I’m about to get introduced to her mother
+
+
+63. How she looks at me when she sits on my lap
+
+
+64. My plan is to never give up on her
+
+
+65. How every effortless picture she takes makes me swoon for her
+
+
+66. How she asks to call me
+
+
+67. The holy matrimony kiss
+
+
+68. How she is the sun to my mornings
+
+
+69. The way she binds my heart so tightly
+
+
+70. Her PowerPoint presentation about us
+
+
+71. Mobile games Block Blast lover
+
+
+72. How she wears my hoodie like it’s the only clothes she owns
+
+
+73. The way she tells me to call her if I can’t sleep, even if she’s asleep
+
+
+74. The way she laughs at my stupid jokes
+
+
+75. When on the beach date, I give her abs by saying the dumbest joke
+
+
+76. The way she makes me want to be a better man for her
+
+
+77. How she will always be my greatest love
+
+
+78. How she makes me believe in soulmates
+
+
+79. I always think she’s the only other person in the world who can love deeper than me
+
+
+80. How we always sit next to each other in a shop
+
+
+81. Her voice when she’s sleepy on call
+
+
+82. How she’s always cold but somehow warm when I hug her
+
+
+83. Giving her my coat when she’s cold
+
+
+84. How my heart still races before I see her every time on a date when I’m waiting for her at the bus stop
+
+
+85. The Christmas card she makes me with love and so much effort
+
+
+86. The gift she made me
+
+
+87. The way she keeps a steady supply of cats to send me when I cry
+
+
+88. How difficult the 2 weeks of death are
+
+
+89. She is my greatest story
+
+
+90. The happiest memories in my life
+
+
+91. Her opening up to me
+
+
+92. Her when she takes her time to say I love you because she wants to be sure
+
+
+93. Our honeymoon stage of relationship
+
+
+94. December 1st, 2024
+
+
+95. 19th July, 2024
+
+
+96. How she has a private PRIVATE Instagram
+
+
+97. The way we can’t stay away from each other no matter how hard we try
+
+
+98. How she puts me as part of her wallpaper slide for a little while
+
+
+99. The picture she takes of me on 0.5 while she’s on my lap and I’m wearing glasses in our spot
+
+
+100. How she loves hearing my heartbeat
+
+
+101. How she excitedly tells me about her day sometimes
+
+
+102. How she makes life feel like a fairy tale
+
+
+103. The way every date feels short even when we see each other for 6+ hours
+
+
+104. How she appreciates the first time I walk her home on the 19th of July
+
+
+105. When we are at our first library date and I’m doing waves questions and I catch her staring at me from the side
+
+
+106. The way she runs to me on our date after the 2 weeks of death
+
+
+107. How she listens to me yap about dumb stuff like Berserk and Dragon Ball and Pokemon
+
+
+108. The happy birthday message she sends me even when we aren’t together
+
+
+109. Our calls when we stay up the whole night to talk to each other
+
+
+110. I wish we were the only people in the world
+
+
+111. The memories I have of that Maccies in town
+
+
+112. How she always says she’s about to give in if I ask her one more time to talk to me during the silent treatment
+
+
+113. The lover boy she makes of me
+
+
+114. Because she is mine and mine only
+
+
+115. How she loves so deeply it hurts her
+
+
+116. The memories I cherish forever
+
+
+117. When she helps me prepare for my interview at Costa and actually writes things
+
+
+118. Because even if a lifetime passes, I’ll still be in love with her
+
+
+119. Every single hug
+
+
+120. The way she notices the coffee colour in my dark eyes
+
+
+121. How every CAS song that comes on TikTok reminds me of her and brings back old memories of our prime relationship era
+
+
+122. How she probably still hasn’t washed my hoodie
+
+
+123. Her love for Mylo
+
+
+124. When we go to the Christmas markets and get foam all over our heads
+
+
+125. When I post her to music
+
+
+126. There is no plan to give up on her—I tell myself I won’t
+
+
+127. Her snatched waist and how proud she is of it, as she should be
+
+
+128. What do I do now?
+
+
+129. I see God in her
+
+
+130. She’s my beloved
+
+
+131. She’s the peace of my soul
+
+
+132. I don’t want to stop loving her
+
+
+133. How she brings gifts for my brother
+
+
+134. How she brings gifts for my mum
+
+
+135. My mum likes her
+
+
+136. The way she reaches to hold my hand
+
+
+137. How she has more belief that I’ll get into Oxford than me
+
+
+138. How she genuinely compromises for my attention when I’m revising for my PAT
+
+
+139. Her love for small thoughtful gifts
+
+
+140. The way she always makes me order
+
+
+141. Our hot chocolate date
+
+
+142. How she wants my mum to like her
+
+
+143. The fact that she’s my first thought in the morning when I wake up and the last thought at night when I fall asleep
+
+
+144. The way she apologises when she’s mean to me when I call her after we break up
+
+
+145. The way she’ll always be a part of me
+
+
+146. The way she loves getting her head scratched even though she says it’s not that
+
+
+147. The way she still smiles when I kiss her on the cheek when she’s mad at me
+
+
+148. The way she gives me her penguin
+
+
+149. The way she listens intently when I explain buoyancy on our first date
+
+
+150. How she always asks me if something’s up when I’m being dry
+
+
+151. She makes my heart race every time she says something kind still
+
+
+152. The way I skip happily through the world in December
+
+
+153. You don’t even know the dreams you show me
+
+
+154. I can’t wake up or sleep when I’m without her
+
+
+155. How she apologises to me for not taking the initiative to apologise
+
+
+156. The warmth of her hugs
+
+
+157. The way she becomes my safe space to open up
+
+
+158. The way she makes compromises to see me when I want to feel wanted too
+
+
+159. How she accepts the flaws in my looks and ignores them
+
+
+160. Her 5-foot-2-ness
+
+
+161. How she always zones out all the time
+
+
+162. How much I miss making out with her on the bus
+
+
+163. The way she takes pictures of us on our beach date on the bus there
+
+
+164. The funny story she tells me about pooping in a box when she was a kid because she was locked in
+
+
+165. How she always makes sure I take my meds when I’m sick like once a month
+
+
+166. The way she’s shivering every date we go on but always still wants to see me
+
+
+167. Our second date
+
+
+168. How she’s lowkey way better at navigation than me
+
+
+169. When I ask her the question about the clock, she gets the answer within seconds when I take minutes
+
+
+170. The PAT question she solves in a minute that I can’t solve at all
+
+
+171. The way she actually wants to make something of her life and works hard to do so
+
+
+172. How she looks in the black dress she wears on New Year’s
+
+
+173. The way she gives me the most genuine, warmest hugs
+`;  // Paste your FULL list here.
+
+    const reasons = reasonsText
+      .split(/\d+\.\s/)
+      .filter(reason => reason.trim() !== '');
+
+    let currentIndex = 0;
+
+    function initCarousel() {
+      const carousel = document.getElementById('carousel');
+      carousel.innerHTML = '';
+
+      reasons.forEach((reason, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        if (index === 0) card.classList.add('active');
+        card.textContent = reason.trim();
+        carousel.appendChild(card);
+      });
+
+      updateCounter();
+      updateButtons();
+    }
+
+    function showCard(index) {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach((card, i) => {
+        card.classList.remove('active');
+        if (i === index) card.classList.add('active');
+      });
+      updateCounter();
+      updateButtons();
+    }
+
+    function nextCard() {
+      if (currentIndex < reasons.length - 1) {
+        currentIndex++;
+        showCard(currentIndex);
+      }
+    }
+
+    function prevCard() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        showCard(currentIndex);
+      }
+    }
+
+    function updateCounter() {
+      document.getElementById('counter').textContent = `Reason ${currentIndex + 1} of ${reasons.length}`;
+    }
+
+    function updateButtons() {
+      document.getElementById('prevBtn').disabled = currentIndex === 0;
+      document.getElementById('nextBtn').disabled = currentIndex === reasons.length - 1;
+    }
+
+    window.onload = initCarousel;
+  </script>
+</body>
+</html>
